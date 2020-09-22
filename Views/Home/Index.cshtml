@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model VPProject.Models.UIModels.BookInputModel
+
+<div class="container">
+    <form asp-controller="Home" asp-action="Calculate" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="BookCheckIn"></label>
+                    <input asp-for="BookCheckIn" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="BookReturn"></label>
+                    <input asp-for="BookReturn" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(p => p.CountryId)
+                    @Html.DropDownListFor(p => p.CountryId, (List<SelectListItem>)ViewBag.ddCountryItems, new { @class = "form-control" })
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary float-right">Send</button>
+            </div>
+            <br />
+        </div>
+    </form>
+    <h1>@ViewBag.PenaltyResult</h1>
+    <br />
+    @if (ViewBag.Messages != null && ViewBag.Messages.Count > 0)
+    {
+        <div class="alert alert-info" role="alert">
+            <strong>
+                Message
+            </strong>
+            <br />
+            <ul>
+                @foreach (var error in ViewBag.Messages)
+                {
+                    <li>
+                        @error
+                    </li>
+                }
+
+            </ul>
+        </div>
+    }
+</div>
